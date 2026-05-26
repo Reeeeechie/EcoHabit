@@ -1,0 +1,18 @@
+# Visual Studio Code .vscode folder
+.vscode/*
+
+# Exceptions to keep useful team settings
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Ignore the workspace file itself if you don't want to share it
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
