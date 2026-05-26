@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoHabit – Kalkulator Emisi Karbon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=600;700&family=DM+Sans:wght=300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/calculator.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="home.html">EcoHabit</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a class="active" href="calculator.html">Calculator</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="aboutUs.html">About Us</a></li>
+    </ul>
+    <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+  </nav>
+
+  <div class="page active">
+    <div class="calc-page">
+      <h1>Kalkulator Emisi Karbon</h1>
+      <p class="subtitle">Hitung emisi karbon Anda hanya dalam 3 langkah!</p>
+
+      <div class="calc-layout">
+        <div>
+          <div id="step1" class="step-card">
+            <div class="step-header">
+                <div class="step-title-row">
+                <span>Langkah 1: Transportasi</span>
+                <span>0% Selesai</span>
+                </div>
+                <div class="step-progress">
+                <div class="step-progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="step-body">
+                <div class="step-icon-row">
+                <div class="step-icon">🚗</div>
+                <div>
+                    <h2>Transportasi</h2>
+                    <p>Kendaraan apa saja yang Anda gunakan untuk bepergian?</p>
+                </div>
+                </div>
+                <div class="form-divider"></div>
+                
+                <div id="transport-list">
+                <div class="form-row transport-row" style="margin-bottom: 16px; align-items: flex-end;">
+                    <div class="form-group" style="flex: 1;">
+                    <label>Total Jarak Tempuh (km)</label>
+                    <input type="number" class="trans-distance" placeholder="cth. 50" min="0" />
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Tipe Transportasi</label>
+                        <select class="trans-type">
+                            <option value="unpicked">Pilih kendaraan</option>
+                            <option value="motor">Motor</option>
+                            <option value="mobil">Mobil Bensin</option>
+                            <option value="mobil-diesel">Mobil Diesel</option>
+                            <option value="bus">Bus Umum</option>
+                            <option value="kereta">Kereta</option>
+                            <option value="pesawat">Pesawat</option>
+                            <option value="mobil-listrik">Mobil Listrik</option>
+                            <option value="motor-listrik">Motor Listrik</option>
+                        </select>
+                    </div>
+                    <button class="btn-remove" type="button" onclick="removeTransport(this)" style="margin-bottom: 6px; padding: 10px 14px;">×</button>
+                </div>
+                </div>
+
+                <button class="btn-add" type="button" onclick="addTransport()" style="margin-top: 8px;">+ Tambah Transportasi</button>
+            </div>
+            <div class="step-footer" style="margin-top: 24px;">
+                <button class="btn-back" disabled style="opacity: 0.4; cursor: not-allowed;">Kembali</button>
+                <button class="btn-next" onclick="goStep(2)">Selanjutnya →</button>
+            </div>
+            </div>
+
+          <div id="step2" class="step-card" style="display: none;">
+            <div class="step-header">
+              <div class="step-title-row">
+                <span>Langkah 2: Rumah Tangga</span>
+                <span>33% Selesai</span>
+              </div>
+              <div class="step-progress">
+                <div class="step-progress-bar" style="width: 33%"></div>
+              </div>
+            </div>
+            <div class="step-body">
+              <div class="step-icon-row">
+                <div class="step-icon">🏠</div>
+                <div>
+                  <h2>Rumah Tangga</h2>
+                  <p>Peralatan apa saja yang ada di rumah Anda?</p>
+                </div>
+              </div>
+              <div class="form-divider"></div>
+              <p style="font-size: 0.85rem; color: var(--text-mid); margin-bottom: 14px; font-weight: 500;">Perabotan-Perabotan</p>
+              <div class="appliance-list" id="appliance-list">
+                <div class="appliance-row">
+                  <input type="text" placeholder="cth. Lampu" class="app-name" />
+                  <input type="number" placeholder="Masukkan jumlah perabotan" class="app-qty" min="0" />
+                  <button class="btn-remove" onclick="removeAppliance(this)">×</button>
+                </div>
+              </div>
+              <button class="btn-add" onclick="addAppliance()">+ Tambah Baris</button>
+              <div style="margin-top: 20px;">
+                <div class="form-group">
+                  <label>Tagihan Listrik/Bulan (Rp)</label>
+                  <input type="number" id="electric-bill" placeholder="cth. 300000" min="0" />
+                </div>
+              </div>
+            </div>
+            <div class="step-footer">
+              <button class="btn-back" onclick="goStep(1)">Kembali</button>
+              <button class="btn-next" onclick="goStep(3)">Selanjutnya →</button>
+            </div>
+          </div>
+
+          <div id="step3" class="step-card" style="display: none;">
+            <div class="step-header">
+              <div class="step-title-row">
+                <span>Langkah 3: Makanan &amp; Minuman</span>
+                <span>67% Selesai</span>
+              </div>
+              <div class="step-progress">
+                <div class="step-progress-bar" style="width: 67%"></div>
+              </div>
+            </div>
+            <div class="step-body">
+              <div class="step-icon-row">
+                <div class="step-icon">🍽️</div>
+                <div>
+                  <h2>Makanan &amp; Minuman</h2>
+                  <p>Bagaimana pola makan Anda sehari-hari?</p>
+                </div>
+              </div>
+              <div class="form-divider"></div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Pola Makan</label>
+                  <select id="diet">
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="mixed" selected>Campuran</option>
+                    <option value="meat-heavy">Banyak Daging</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Konsumsi Daging/Minggu (porsi)</label>
+                  <input type="number" id="meat-portions" placeholder="cth. 7" min="0" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group full">
+                  <label>Konsumsi Makanan Lokal (%)</label>
+                  <input type="number" id="local-food" placeholder="cth. 60" min="0" max="100" />
+                </div>
+              </div>
+            </div>
+            <div class="step-footer">
+              <button class="btn-back" onclick="goStep(2)">Kembali</button>
+              <button class="btn-next" onclick="showResult()">Hitung Emisi →</button>
+            </div>
+          </div>
+
+          <div id="step-result" class="step-card" style="display: none;">
+            <div class="step-header">
+              <div class="step-title-row">
+                <span>Hasil Estimasi Anda</span>
+                <span>100% Selesai ✓</span>
+              </div>
+              <div class="step-progress">
+                <div class="step-progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <div class="step-body">
+              <div class="step-icon-row">
+                <div class="step-icon">🌿</div>
+                <div>
+                  <h2>Emisi Karbon Anda</h2>
+                  <p>Berdasarkan data yang Anda masukkan</p>
+                </div>
+              </div>
+              <div class="form-divider"></div>
+              <div class="result-grid">
+                <div class="result-item">
+                  <div class="val" id="res-transport">—</div>
+                  <div class="lbl">Transportasi<br />(Ton CO₂/Tahun)</div>
+                </div>
+                <div class="result-item">
+                  <div class="val" id="res-house">—</div>
+                  <div class="lbl">Rumah Tangga<br />(Ton CO₂/Tahun)</div>
+                </div>
+                <div class="result-item">
+                  <div class="val" id="res-food">—</div>
+                  <div class="lbl">Makanan<br />(Ton CO₂/Tahun)</div>
+                </div>
+              </div>
+              <div class="result-tip" id="result-tip"></div>
+              <button class="btn-restart" onclick="restart()">🔄 Hitung Ulang</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="estimate-card">
+          <h3>Estimasi Emisi Karbon</h3>
+          <div class="estimate-total" id="total-display">??? Ton CO₂ / Tahun</div>
+          <div class="estimate-bar-bg">
+            <div class="estimate-bar-fill" id="sidebar-bar" style="width: 20%"></div>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot dot-transport"></div>
+              Transportasi
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot dot-house"></div>
+              Perabotan Rumah Tangga
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot dot-food"></div>
+              Makanan &amp; Minuman
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-logo">EcoHabit</div>
+      <ul class="footer-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="aboutUs.html">About</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <div class="footer-socials">
+        <a class="social-icon" href="#" title="Facebook">f</a>
+        <a class="social-icon" href="#" title="Instagram">IG</a>
+        <a class="social-icon" href="#" title="X">𝕏</a>
+      </div>
+      <p class="footer-copy">© 2026 EcoHabit</p>
+    </footer>
+  </div>
+  <script src="js/calculator.js"></script>
+</body>
+</html>

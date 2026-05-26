@@ -1,0 +1,345 @@
+.calc-page {
+  padding: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.calc-page h1 {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.calc-page .subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Step Card */
+.step-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.step-header { padding: 16px 24px 0; }
+.step-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.step-progress {
+  height: 6px;
+  background: var(--progress-bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.step-progress-bar {
+  height: 100%;
+  background: var(--green-mid);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.step-body { padding: 28px 24px; }
+.step-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.step-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--green-pale);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.step-icon-row h2 {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  color: var(--text-dark);
+}
+
+.step-icon-row p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.form-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* Forms */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--text-mid);
+}
+
+.form-group input, .form-group select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(45, 90, 64, 0.1);
+}
+
+/* Appliances */
+.appliance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.appliance-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 36px;
+  gap: 10px;
+  align-items: center;
+}
+
+.appliance-row input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  background: var(--cream);
+  outline: none;
+  color: var(--text-dark);
+}
+
+.btn-remove {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.btn-remove:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn-add:hover { background: #b8d4c0; }
+
+/* Buttons */
+.step-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-back {
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-mid);
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.btn-next {
+  background: var(--green-btn);
+  color: var(--white);
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.estimate-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 80px;
+}
+
+.estimate-card h3 {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.estimate-total {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 12px 0 16px;
+}
+
+.estimate-bar-bg {
+  height: 8px;
+  background: var(--progress-bg);
+  border-radius: 999px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.estimate-bar-fill {
+  height: 100%;
+  background: var(--green-mid);
+  border-radius: 999px;
+  transition: width 0.5s;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.83rem;
+  color: var(--text-mid);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-transport { background: var(--green-dark); }
+.dot-house     { background: #a3c4a8; }
+.dot-food      { background: #d0dece; }
+
+/* Result Output */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.result-item {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.result-item .val {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  color: var(--green-dark);
+  margin-bottom: 4px;
+}
+
+.result-item .lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.result-tip {
+  background: var(--green-pale);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-size: 0.875rem;
+  color: var(--green-dark);
+  margin-top: 12px;
+}
+
+.btn-restart {
+  margin-top: 20px;
+  width: 100%;
+  background: var(--green-btn);
+  color: var(--white);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .calc-page { padding: 24px 16px; }
+  .calc-layout { grid-template-columns: 1fr; }
+  .estimate-card { position: static; }
+  .form-row, .result-grid { grid-template-columns: 1fr; }
+}
