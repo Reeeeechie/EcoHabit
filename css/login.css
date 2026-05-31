@@ -10,6 +10,7 @@
   font-family: 'DM Sans', sans-serif;
 }
 
+/* Background Abstract Shapes */
 .shape-top-right {
   position: absolute;
   top: 0;
@@ -48,6 +49,7 @@
   z-index: 1;
 }
 
+/* Login Card */
 .login-card {
   position: relative;
   z-index: 10;
@@ -67,6 +69,7 @@
   margin-bottom: 28px;
 }
 
+/* Input Styling */
 .input-group {
   margin-bottom: 20px;
   text-align: left;
@@ -98,6 +101,7 @@
 }
 .forgot-link:hover { text-decoration: underline; }
 
+/* Blue Wireframe Button */
 .btn-submit-login {
   width: 100%;
   background: #0d6efd;
@@ -113,6 +117,7 @@
 }
 .btn-submit-login:hover { background: #0b5ed7; }
 
+/* Divider */
 .or-divider {
   display: flex;
   align-items: center;
@@ -129,6 +134,7 @@
 .or-divider:not(:empty)::before { margin-right: .5em; }
 .or-divider:not(:empty)::after { margin-left: .5em; }
 
+/* Social Login Buttons */
 .social-row {
   display: flex;
   justify-content: center;
