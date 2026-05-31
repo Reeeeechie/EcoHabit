@@ -338,9 +338,6 @@ function showResult() {
   const recText = lang === 'en' ? 'Recommendation:' : 'Rekomendasi:';
   document.getElementById('result-tip').innerHTML = `<strong>${recText}</strong> ${tip}`;
 
-  const recText = lang === 'en' ? 'Recommendation:' : 'Rekomendasi:';
-  document.getElementById('result-tip').innerHTML = `<strong>${recText}</strong> ${tip}`;
-
   // --- SAVE DATA ---
   const emissionData = {
     total: total.toFixed(2),

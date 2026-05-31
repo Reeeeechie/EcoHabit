@@ -69,6 +69,16 @@
   margin-bottom: 16px;
 }
 
+#dash-total-icon {
+  background: #ffe6e6;
+}
+#dash-biggest-icon {
+  background: #e6f2ff;
+}
+#dash-target-icon {
+  background: #e6ffe6;
+}
+
 .dash-card h3 {
   font-size: 1rem;
   color: var(--text-mid);
@@ -76,18 +86,29 @@
   margin-bottom: 8px;
 }
 
-.card-value {
+.card-value, .card-value span {
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-dark);
   margin-bottom: 8px;
 }
 
-.card-value span {
+#dash-biggest-val {
+  margin-bottom: 0px;
+}
+
+#dash-biggest-val span {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* .card-value span {
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-muted);
-}
+} */
 
 .card-desc {
   font-size: 0.85rem;

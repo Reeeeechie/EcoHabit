@@ -347,7 +347,14 @@
   margin-top: 12px;
 }
 
-.btn-restart {
+.btn-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-result {
+  display: inline-block;
   margin-top: 20px;
   width: 100%;
   background: var(--green-btn);
