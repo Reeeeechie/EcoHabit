@@ -163,3 +163,20 @@
   color: #0d6efd;
   text-decoration: none;
 }
+
+/* Custom Error Validation */
+.error-message {
+  color: #dc3545; /* Bootstrap red */
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: none; /* Hidden until triggered */
+}
+
+.error-message.show {
+  display: block; /* Show the text */
+}
+
+/* Optional UX boost: turning the input border red as well */
+.input-group input.error-border {
+  border-color: #dc3545; 
+}
