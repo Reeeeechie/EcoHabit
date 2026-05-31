@@ -221,8 +221,10 @@
         <div class="estimate-card">
           <h3 data-i18n="calc_side_title">Estimasi Emisi Karbon</h3>
           <div class="estimate-total" id="total-display">??? Ton CO₂ / Tahun</div>
-          <div class="estimate-bar-bg">
-            <div class="estimate-bar-fill" id="sidebar-bar" style="width: 20%"></div>
+          <div class="estimate-bar-bg" style="display: flex;">
+            <div class="estimate-bar-fill" id="bar-trans""></div>
+            <div class="estimate-bar-fill" id="bar-house""></div>
+            <div class="estimate-bar-fill" id="bar-food""></div>
           </div>
           <div class="legend">
             <div class="legend-item">

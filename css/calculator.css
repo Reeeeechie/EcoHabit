@@ -270,9 +270,20 @@
 
 .estimate-bar-fill {
   height: 100%;
-  background: var(--green-mid);
-  border-radius: 999px;
+  width: 0%;
   transition: width 0.5s;
+}
+
+#bar-trans {
+  background: var(--green-dark);
+  border-radius: 999px 0 0 999px;
+}
+#bar-house {
+  background: var(--green-light);
+}
+#bar-food {
+  background: var(--ash-grey);
+  border-radius: 0 999px 999px 0;
 }
 
 .legend {
@@ -296,8 +307,8 @@
   flex-shrink: 0;
 }
 .dot-transport { background: var(--green-dark); }
-.dot-house     { background: #a3c4a8; }
-.dot-food      { background: #d0dece; }
+.dot-house     { background: var(--green-light); }
+.dot-food      { background: var(--ash-grey); }
 
 /* Result Output */
 .result-grid {

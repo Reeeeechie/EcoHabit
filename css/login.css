@@ -87,7 +87,7 @@
 }
 
 .input-group input:focus {
-  border-color: #1a73e8;
+  border-color: var(--hadfield-blue);
 }
 
 .forgot-link {
@@ -104,7 +104,7 @@
 /* Blue Wireframe Button */
 .btn-submit-login {
   width: 100%;
-  background: #0d6efd;
+  background: var(--hadfield-blue);
   color: #ffffff;
   border: none;
   padding: 14px;
@@ -115,7 +115,7 @@
   transition: background 0.2s;
   margin-bottom: 28px;
 }
-.btn-submit-login:hover { background: #0b5ed7; }
+.btn-submit-login:hover { background: var(--hadfield-blue); }
 
 /* Divider */
 .or-divider {
@@ -160,13 +160,13 @@
   display: inline-block;
   margin-top: 20px;
   font-size: 0.85rem;
-  color: #0d6efd;
+  color: var(--hadfield-blue);
   text-decoration: none;
 }
 
 /* Custom Error Validation */
 .error-message {
-  color: #dc3545; /* Bootstrap red */
+  color: var(--bootstrap-red); /* Bootstrap red */
   font-size: 0.8rem;
   margin-top: 5px;
   display: none; /* Hidden until triggered */

@@ -57,14 +57,14 @@
           <div class="dash-card">
             <div class="card-icon" style="background: #ffe6e6;">🔥</div>
             <h3 data-i18n="dash_c1_title">Total Emisi</h3>
-            <div class="card-value">2.4 <span>Ton CO₂</span></div>
+            <div class="card-value"><span id="dash-total-val">0.00</span> <span>Ton CO₂</span></div>
             <p class="card-desc text-danger" data-i18n="dash_c1_desc">↑ 12% dari bulan lalu</p>
           </div>
 
           <div class="dash-card">
             <div class="card-icon" style="background: #e6f2ff;">🚗</div>
             <h3 data-i18n="dash_c2_title">Penyumbang Terbesar</h3>
-            <div class="card-value" data-i18n="dash_c2_val">Transportasi</div>
+            <div class="card-value" id="dash-biggest-val" data-i18n="dash_c2_val">-</div>
             <p class="card-desc" data-i18n="dash_c2_desc">45% dari total emisi Anda</p>
           </div>
 
@@ -78,28 +78,8 @@
 
         <div class="dash-history">
           <h2 data-i18n="dash_hist_title">Riwayat Perhitungan Terakhir</h2>
-          <div class="history-list">
-            <div class="history-item">
-              <div class="hist-info">
-                <strong data-i18n="dash_hist_mo1">Mei 2026</strong>
-                <span data-i18n="dash_hist_cat1">Transportasi & Rumah Tangga</span>
-              </div>
-              <div class="hist-score">0.8 Ton CO₂</div>
-            </div>
-            <div class="history-item">
-              <div class="hist-info">
-                <strong data-i18n="dash_hist_mo2">April 2026</strong>
-                <span data-i18n="dash_hist_cat2">Semua Kategori</span>
-              </div>
-              <div class="hist-score">1.2 Ton CO₂</div>
-            </div>
-            <div class="history-item">
-              <div class="hist-info">
-                <strong data-i18n="dash_hist_mo3">Maret 2026</strong>
-                <span data-i18n="dash_hist_cat3">Transportasi</span>
-              </div>
-              <div class="hist-score">0.4 Ton CO₂</div>
-            </div>
+          <div class="history-list" id="dash-history-list">
+            
           </div>
         </div>
 

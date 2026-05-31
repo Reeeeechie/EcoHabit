@@ -55,8 +55,27 @@ function updateSidebar(t, h, f) {
   const total = t + h + f;
   document.getElementById('total-display').textContent =
     total > 0 ? total.toFixed(2) + ' Ton CO₂ / Tahun' : '??? Ton CO₂ / Tahun';
-  const pct = Math.min(total / 20 * 100, 100);
-  document.getElementById('sidebar-bar').style.width = pct + '%';
+  
+  let pctTrans = (t / total) * 100;
+  let pctHouse = (h / total) * 100;
+  let pctFood = (f / total) * 100;
+
+  // If they exceed 100%, scale them down proportionally so the bar stays full but accurate
+  const totalPct = pctTrans + pctHouse + pctFood;
+  if (totalPct > 100) {
+    const scale = 100 / totalPct;
+    pctTrans *= scale;
+    pctHouse *= scale;
+    pctFood *= scale;
+  }
+
+  const barTrans = document.getElementById('bar-trans');
+  const barHouse = document.getElementById('bar-house');
+  const barFood = document.getElementById('bar-food');
+  
+  if (barTrans) barTrans.style.width = pctTrans + '%';
+  if (barHouse) barHouse.style.width = pctHouse + '%';
+  if (barFood) barFood.style.width = pctFood + '%';
 }
 
 // ─── FORM VALIDATION LOGIC ───
@@ -318,6 +337,24 @@ function showResult() {
 
   const recText = lang === 'en' ? 'Recommendation:' : 'Rekomendasi:';
   document.getElementById('result-tip').innerHTML = `<strong>${recText}</strong> ${tip}`;
+
+  const recText = lang === 'en' ? 'Recommendation:' : 'Rekomendasi:';
+  document.getElementById('result-tip').innerHTML = `<strong>${recText}</strong> ${tip}`;
+
+  // --- SAVE DATA ---
+  const emissionData = {
+    total: total.toFixed(2),
+    transport: emissions.transport.toFixed(2),
+    house: emissions.house.toFixed(2),
+    food: emissions.food.toFixed(2),
+    date: new Date().toISOString()
+  };
+  
+  // Get existing history array, insert newest at the beginning, and save
+  let history = JSON.parse(localStorage.getItem('emissionHistory')) || [];
+  history.unshift(emissionData); 
+  localStorage.setItem('emissionHistory', JSON.stringify(history));
+
   currentStep = 4;
 }
 
