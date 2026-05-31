@@ -1,3 +1,5 @@
+const username = localStorage.getItem('username') || 'Eco User';
+
 // 1. The Dictionary Object
 const translations = {
   id: {
@@ -102,7 +104,7 @@ const translations = {
     dash_out_desc: "Login untuk melihat riwayat dan perkembangan emisi karbon Anda dari waktu ke waktu.",
     dash_out_btn: "Login Sekarang",
     
-    dash_in_greet: "Halo, Eco User! 👋",
+    dash_in_greet: `Halo, ${username}! 👋`,
     dash_in_sub: "Berikut adalah ringkasan jejak karbon Anda bulan ini.",
     dash_in_btn_new: "+ Hitung Emisi Baru",
     
@@ -220,7 +222,7 @@ const translations = {
     dash_out_desc: "Login to view your carbon emission history and progress over time.",
     dash_out_btn: "Login Now",
     
-    dash_in_greet: "Hello, Eco User! 👋",
+    dash_in_greet: `Hello, ${username}! 👋`,
     dash_in_sub: "Here is a summary of your carbon footprint this month.",
     dash_in_btn_new: "+ Calculate New Emission",
     

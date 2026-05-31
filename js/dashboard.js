@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- user is logged in ---
   loggedOutView.style.display = 'none';
   loggedInView.style.display = 'block';
-  
+
   const history = JSON.parse(localStorage.getItem('emissionHistory')) || [];
   
   if (history.length === 0) return;
