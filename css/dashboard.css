@@ -58,6 +58,13 @@
   border: 1px solid var(--border);
 }
 
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 .card-icon {
   width: 48px;
   height: 48px;
@@ -66,7 +73,6 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  margin-bottom: 16px;
 }
 
 #dash-total-icon {
@@ -83,7 +89,7 @@
   font-size: 1rem;
   color: var(--text-mid);
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .card-value, .card-value span {
