@@ -14,12 +14,21 @@
   <nav>
     <a class="nav-logo" href="index.html">EcoHabit</a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="calculator.html">Calculator</a></li>
-      <li><a class="active" href="dashboard.html">Dashboard</a></li>
-      <li><a href="aboutUs.html">About Us</a></li>
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="calculator.html" data-i18n="nav_calc">Calculator</a></li>
+      <li><a class="active" href="dashboard.html" data-i18n="nav_dash">Dashboard</a></li>
+      <li><a href="aboutUs.html" data-i18n="nav_about">About Us</a></li>
     </ul>
-    <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+    
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button id="lang-id" class="lang-btn active">ID</button>
+        <span class="lang-divider">|</span>
+        <button id="lang-en" class="lang-btn">EN</button>
+      </div>
+
+      <button class="btn-login" data-i18n="btn_login" onclick="window.location.href='login.html'">Login</button>
+    </div>
   </nav>
 
   <div class="page active">
@@ -27,9 +36,9 @@
     <div id="loggedOutView" class="dashboard-state">
       <div style="text-align: center; padding: 96px 48px;">
         <div style="font-size: 3rem; margin-bottom: 16px;">📈</div>
-        <h2 style="font-family: var(--font-head); font-size: 1.8rem; color: var(--text-dark); margin-bottom: 12px;">Dashboard</h2>
-        <p style="color: var(--text-muted); max-width: 400px; margin: 0 auto;">Login untuk melihat riwayat dan perkembangan emisi karbon Anda dari waktu ke waktu.</p>
-        <button class="btn-login" style="margin-top: 28px; padding: 12px 32px; font-size: 0.95rem;" onclick="window.location.href='login.html'">Login Sekarang</button>
+        <h2 data-i18n="dash_out_title" style="font-family: var(--font-head); font-size: 1.8rem; color: var(--text-dark); margin-bottom: 12px;">Dashboard</h2>
+        <p data-i18n="dash_out_desc" style="color: var(--text-muted); max-width: 400px; margin: 0 auto;">Login untuk melihat riwayat dan perkembangan emisi karbon Anda dari waktu ke waktu.</p>
+        <button class="btn-login" data-i18n="dash_out_btn" style="margin-top: 28px; padding: 12px 32px; font-size: 0.95rem;" onclick="window.location.href='login.html'">Login Sekarang</button>
       </div>
     </div>
 
@@ -38,56 +47,56 @@
         
         <header class="dash-header">
           <div>
-            <h1 class="dash-title">Halo, Eco User! 👋</h1>
-            <p class="dash-subtitle">Berikut adalah ringkasan jejak karbon Anda bulan ini.</p>
+            <h1 class="dash-title" data-i18n="dash_in_greet">Halo, Eco User! 👋</h1>
+            <p class="dash-subtitle" data-i18n="dash_in_sub">Berikut adalah ringkasan jejak karbon Anda bulan ini.</p>
           </div>
-          <button class="btn-primary" onclick="window.location.href='calculator.html'">+ Hitung Emisi Baru</button>
+          <button class="btn-primary" data-i18n="dash_in_btn_new" onclick="window.location.href='calculator.html'">+ Hitung Emisi Baru</button>
         </header>
 
         <div class="dash-grid">
           <div class="dash-card">
             <div class="card-icon" style="background: #ffe6e6;">🔥</div>
-            <h3>Total Emisi</h3>
+            <h3 data-i18n="dash_c1_title">Total Emisi</h3>
             <div class="card-value">2.4 <span>Ton CO₂</span></div>
-            <p class="card-desc text-danger">↑ 12% dari bulan lalu</p>
+            <p class="card-desc text-danger" data-i18n="dash_c1_desc">↑ 12% dari bulan lalu</p>
           </div>
 
           <div class="dash-card">
             <div class="card-icon" style="background: #e6f2ff;">🚗</div>
-            <h3>Penyumbang Terbesar</h3>
-            <div class="card-value">Transportasi</div>
-            <p class="card-desc">45% dari total emisi Anda</p>
+            <h3 data-i18n="dash_c2_title">Penyumbang Terbesar</h3>
+            <div class="card-value" data-i18n="dash_c2_val">Transportasi</div>
+            <p class="card-desc" data-i18n="dash_c2_desc">45% dari total emisi Anda</p>
           </div>
 
           <div class="dash-card">
             <div class="card-icon" style="background: #e6ffe6;">🌳</div>
-            <h3>Target Bulanan</h3>
-            <div class="card-value">Tercapai!</div>
-            <p class="card-desc text-success">Anda menghemat 0.5 Ton CO₂</p>
+            <h3 data-i18n="dash_c3_title">Target Bulanan</h3>
+            <div class="card-value" data-i18n="dash_c3_val">Tercapai!</div>
+            <p class="card-desc text-success" data-i18n="dash_c3_desc">Anda menghemat 0.5 Ton CO₂</p>
           </div>
         </div>
 
         <div class="dash-history">
-          <h2>Riwayat Perhitungan Terakhir</h2>
+          <h2 data-i18n="dash_hist_title">Riwayat Perhitungan Terakhir</h2>
           <div class="history-list">
             <div class="history-item">
               <div class="hist-info">
-                <strong>Mei 2026</strong>
-                <span>Transportasi & Rumah Tangga</span>
+                <strong data-i18n="dash_hist_mo1">Mei 2026</strong>
+                <span data-i18n="dash_hist_cat1">Transportasi & Rumah Tangga</span>
               </div>
               <div class="hist-score">0.8 Ton CO₂</div>
             </div>
             <div class="history-item">
               <div class="hist-info">
-                <strong>April 2026</strong>
-                <span>Semua Kategori</span>
+                <strong data-i18n="dash_hist_mo2">April 2026</strong>
+                <span data-i18n="dash_hist_cat2">Semua Kategori</span>
               </div>
               <div class="hist-score">1.2 Ton CO₂</div>
             </div>
             <div class="history-item">
               <div class="hist-info">
-                <strong>Maret 2026</strong>
-                <span>Transportasi</span>
+                <strong data-i18n="dash_hist_mo3">Maret 2026</strong>
+                <span data-i18n="dash_hist_cat3">Transportasi</span>
               </div>
               <div class="hist-score">0.4 Ton CO₂</div>
             </div>
@@ -100,10 +109,10 @@
     <footer>
       <div class="footer-logo">EcoHabit</div>
       <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutUs.html">About</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="aboutUs.html" data-i18n="nav_about">About</a></li>
+        <li><a href="#" data-i18n="ft_service">Service</a></li>
+        <li><a href="#" data-i18n="ft_contact">Contact Us</a></li>
       </ul>
       <div class="footer-socials">
         <a class="social-icon" href="#">f</a>
@@ -114,6 +123,7 @@
     </footer>
   </div>
 
+  <script src="js/lang.js"></script>
   <script src="js/global.js"></script>
   <script src="js/dashboard.js"></script>
 </body>

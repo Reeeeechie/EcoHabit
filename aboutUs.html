@@ -12,30 +12,39 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="home.html">EcoHabit</a>
+    <a class="nav-logo" href="index.html">EcoHabit</a>
     <ul class="nav-links">
-      <li><a href="home.html">Home</a></li>
-      <li><a href="calculator.html">Calculator</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a class="active" href="aboutUs.html">About Us</a></li>
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="calculator.html" data-i18n="nav_calc">Calculator</a></li>
+      <li><a href="dashboard.html" data-i18n="nav_dash">Dashboard</a></li>
+      <li><a class="active" href="aboutUs.html" data-i18n="nav_about">About Us</a></li>
     </ul>
-    <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+    
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button id="lang-id" class="lang-btn active">ID</button>
+        <span class="lang-divider">|</span>
+        <button id="lang-en" class="lang-btn">EN</button>
+      </div>
+
+      <button class="btn-login" data-i18n="btn_login" onclick="window.location.href='login.html'">Login</button>
+    </div>
   </nav>
 
   <div class="page active">
     <div style="text-align: center; padding: 96px 48px;">
       <div style="font-size: 3rem; margin-bottom: 16px;">🌱</div>
-      <h2 style="font-family: var(--font-head); font-size: 1.8rem; color: var(--text-dark); margin-bottom: 12px;">Tentang EcoHabit</h2>
-      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto; line-height: 1.7;">EcoHabit adalah platform edukasi lingkungan yang membantu masyarakat Indonesia memahami dan mengurangi jejak karbon mereka melalui cara yang mudah dan interaktif.</p>
+      <h2 data-i18n="about_title" style="font-family: var(--font-head); font-size: 1.8rem; color: var(--text-dark); margin-bottom: 12px;">Tentang EcoHabit</h2>
+      <p data-i18n="about_desc" style="color: var(--text-muted); max-width: 500px; margin: 0 auto; line-height: 1.7;">EcoHabit adalah platform edukasi lingkungan yang membantu masyarakat Indonesia memahami dan mengurangi jejak karbon mereka melalui cara yang mudah dan interaktif.</p>
     </div>
 
     <footer>
       <div class="footer-logo">EcoHabit</div>
       <ul class="footer-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="aboutUs.html">About</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="aboutUs.html" data-i18n="nav_about">About</a></li>
+        <li><a href="#" data-i18n="ft_service">Service</a></li>
+        <li><a href="#" data-i18n="ft_contact">Contact Us</a></li>
       </ul>
       <div class="footer-socials">
         <a class="social-icon" href="#">f</a>
@@ -46,6 +55,7 @@
     </footer>
   </div>
 
+  <script src="js/lang.js"></script>
   <script src="js/global.js"></script>
 </body>
 </html>

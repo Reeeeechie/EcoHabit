@@ -23,7 +23,6 @@ const dietFactors = {
 };
 
 // ─── FUNGSI KALKULASI INTERNAL ───
-// Note: calcTransport is overridden later in the file for dynamic rows, but kept here for fallback
 function calcHouse() {
   const bill = parseFloat(document.getElementById('electric-bill').value) || 0;
   return +(bill * 0.000002 * 4).toFixed(2);
@@ -38,6 +37,20 @@ function calcFood() {
   return +((base + meat * 0.01) * localFactor).toFixed(2);
 }
 
+function calcTransport() {
+  const rows = document.querySelectorAll('.transport-row');
+  let totalTransportEmission = 0;
+
+  rows.forEach(row => {
+    const distanceInput = row.querySelector('.trans-distance').value;
+    const vehicleType = row.querySelector('.trans-type').value;
+    const d = parseFloat(distanceInput) || 0;
+    const fac = vehicleFactors[vehicleType] || 0; 
+    totalTransportEmission += (d * fac);
+  });
+  return +totalTransportEmission.toFixed(2);
+}
+
 function updateSidebar(t, h, f) {
   const total = t + h + f;
   document.getElementById('total-display').textContent =
@@ -46,53 +59,126 @@ function updateSidebar(t, h, f) {
   document.getElementById('sidebar-bar').style.width = pct + '%';
 }
 
-// ─── FUNGSI NAVIGASI LANGKAH (STEPS) ───
-function getValid(currentStep) {
+// ─── FORM VALIDATION LOGIC ───
+
+// Helper function to inject individual error messages
+function markError(el, customMsg) {
+  el.classList.add('error-border');
+  
+  let msg = el.nextElementSibling;
+  if (!msg || !msg.classList.contains('error-message')) {
+    msg = document.createElement('div');
+    msg.className = 'error-message';
+    el.parentNode.insertBefore(msg, el.nextSibling);
+  }
+  
+  const lang = localStorage.getItem('preferredLang') || 'id';
+  msg.textContent = customMsg || (lang === 'en' ? 'This field is required' : 'Input ini wajib diisi');
+}
+
+// Global listener: Clear errors when focused (clicked or tabbed into)
+document.addEventListener('focusin', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+    e.target.classList.remove('error-border');
+    
+    // Clear individual error
+    const errorMsg = e.target.nextElementSibling;
+    if (errorMsg && errorMsg.classList.contains('error-message') && !errorMsg.classList.contains('row-error-msg')) {
+      errorMsg.remove();
+    }
+
+    // Clear row-level error
+    const row = e.target.closest('.transport-row, .appliance-row');
+    if (row) {
+      const rowMsg = row.querySelector('.row-error-msg');
+      if (rowMsg) rowMsg.remove();
+    }
+  }
+});
+
+function getValid(step) {
   let isValid = true;
-  if (currentStep === 1) {
-    // Modified to validate dynamic rows instead of single fields
+  const lang = localStorage.getItem('preferredLang') || 'id';
+  
+  if (step === 1) {
     const rows = document.querySelectorAll('.transport-row');
     rows.forEach(row => {
         const distanceInput = row.querySelector('.trans-distance');
         const vehicleInput = row.querySelector('.trans-type');
-        if (!distanceInput.value || distanceInput.value.trim() === "") isValid = false;
-        if (vehicleInput.value === "unpicked") isValid = false;
+        let rowError = false;
+        
+        if (!distanceInput.value || distanceInput.value.trim() === "") {
+          distanceInput.classList.add('error-border');
+          rowError = true;
+          isValid = false;
+        }
+        if (vehicleInput.value === "unpicked") {
+          vehicleInput.classList.add('error-border');
+          rowError = true;
+          isValid = false;
+        }
+
+        // Apply ONE error message per row to maintain grid layout
+        if (rowError) {
+          let msg = row.querySelector('.row-error-msg');
+          if (!msg) {
+            msg = document.createElement('div');
+            msg.className = 'error-message row-error-msg';
+            row.appendChild(msg);
+          }
+          msg.textContent = lang === 'en' ? 'Please fill in all transport fields' : 'Pastikan semua jarak dan tipe kendaraan diisi';
+        }
     });
-    if(!isValid) alert("Pastikan semua jarak dan tipe kendaraan dipilih!");
   }
 
-  if (currentStep === 2) {
+  if (step === 2) {
+    document.querySelectorAll('.appliance-row').forEach(row => {
+      const nameInput = row.querySelector('.app-name');
+      const qtyInput = row.querySelector('.app-qty');
+      let rowError = false;
+      
+      if (!nameInput.value || nameInput.value.trim() === "") {
+        nameInput.classList.add('error-border');
+        rowError = true;
+        isValid = false;
+      }
+      if (!qtyInput.value || qtyInput.value.trim() === "") {
+        qtyInput.classList.add('error-border');
+        rowError = true;
+        isValid = false;
+      }
+
+      // Apply ONE error message per row to maintain grid layout
+      if (rowError) {
+        let msg = row.querySelector('.row-error-msg');
+        if (!msg) {
+          msg = document.createElement('div');
+          msg.className = 'error-message row-error-msg';
+          row.appendChild(msg);
+        }
+        msg.textContent = lang === 'en' ? 'Please fill in all appliance fields' : 'Mohon isi semua bidang perabotan';
+      }
+    });
+
     let billInput = document.getElementById("electric-bill");
     if(billInput.value.trim() === "") {
+      markError(billInput);
       isValid = false;
-      alert("Text input is empty!");
-    }
-  }
-  if (currentStep === 3) {
-    let meatInput = document.getElementById("meat-portions");
-    let localInput = document.getElementById("local-food");
-
-    if(meatInput.value.trim() === "") {
-      isValid = false;
-      alert("Text input is empty!");
-    }
-    if(localInput.value.trim() === "") {
-      isValid = false;
-      alert("Text input is empty!");
     }
   }
 
   return isValid;
 }
 
+// --- GO TO NEXT STEP ---
 function goStep(n) {
-  let isValid = true;
-  if (currentStep >= 1) {
-    emissions.transport = calcTransport(); // Uses dynamic row version below
-    isValid = getValid(currentStep);
-    if (!isValid) return;
+  // ONLY validate if moving forward
+  if (n > currentStep) {
+    let isValid = getValid(currentStep);
+    if (!isValid) return; 
   }
  
+  if (currentStep >= 1) emissions.transport = calcTransport(); 
   if (currentStep >= 2) emissions.house = calcHouse();
   updateSidebar(emissions.transport, emissions.house, 0);
 
@@ -100,6 +186,75 @@ function goStep(n) {
   currentStep = n;
   document.getElementById('step' + currentStep).style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── ADD ITEM FUNCTIONS ───
+function addAppliance() {
+  const list = document.getElementById('appliance-list');
+  const row = document.createElement('div');
+  row.className = 'appliance-row';
+  row.innerHTML = `
+    <input type="text" data-i18n="calc_s2_place_app" placeholder="cth. Lampu" class="app-name" />
+    <input type="number" data-i18n="calc_s2_place_qty" placeholder="Masukkan jumlah perabotan" class="app-qty" min="0" />
+    <button class="btn-remove" onclick="removeAppliance(this)">×</button>
+  `;
+  list.appendChild(row);
+  
+  if (typeof setLanguage === 'function') setLanguage(localStorage.getItem('preferredLang') || 'id');
+}
+
+function addTransport() {
+  const list = document.getElementById('transport-list');
+  const row = document.createElement('div');
+  row.className = 'form-row transport-row';
+  row.style.marginBottom = '16px';
+  row.style.alignItems = 'flex-end';
+  
+  row.innerHTML = `
+    <div class="form-group" style="flex: 1;">
+      <label data-i18n="calc_s1_label_dist">Total Jarak Tempuh (km)</label>
+      <input type="number" class="trans-distance" data-i18n="calc_s1_place_dist" placeholder="cth. 50" min="0" />
+    </div>
+    <div class="form-group" style="flex: 1;">
+      <label data-i18n="calc_s1_label_type">Tipe Transportasi</label>
+      <select class="trans-type">
+        <option value="unpicked" data-i18n="calc_s1_opt_unpicked">Pilih kendaraan</option>
+        <option value="motor" data-i18n="calc_s1_opt_motor">Motor</option>
+        <option value="mobil" data-i18n="calc_s1_opt_mobil">Mobil Bensin</option>
+        <option value="mobil-diesel" data-i18n="calc_s1_opt_diesel">Mobil Diesel</option>
+        <option value="bus" data-i18n="calc_s1_opt_bus">Bus Umum</option>
+        <option value="kereta" data-i18n="calc_s1_opt_kereta">Kereta</option>
+        <option value="pesawat" data-i18n="calc_s1_opt_pesawat">Pesawat</option>
+        <option value="mobil-listrik" data-i18n="calc_s1_opt_mobil_ev">Mobil Listrik</option>
+        <option value="motor-listrik" data-i18n="calc_s1_opt_motor_ev">Motor Listrik</option>
+      </select>
+    </div>
+    <button class="btn-remove" type="button" onclick="removeTransport(this)" style="margin-bottom: 6px; padding: 10px 14px;">×</button>
+  `;
+  list.appendChild(row);
+  
+  if (typeof setLanguage === 'function') setLanguage(localStorage.getItem('preferredLang') || 'id');
+}
+
+// ─── REMOVE ITEM FUNCTIONS ───
+function removeAppliance(btn) {
+  const list = document.getElementById('appliance-list');
+  if (list.children.length > 1) {
+    btn.closest('.appliance-row').remove();
+  }
+}
+
+function removeTransport(btn) {
+  const list = document.getElementById('transport-list');
+  const lang = localStorage.getItem('preferredLang') || 'id';
+  
+  if (list.children.length > 1) {
+    btn.closest('.transport-row').remove();
+    emissions.transport = calcTransport();
+    updateSidebar(emissions.transport, emissions.house, 0);
+  } else {
+    alert(lang === 'en' ? "⚠️ You must have at least one transportation input." : "⚠️ Minimal harus ada satu input transportasi.");
+  }
 }
 
 // Menampilkan Hasil Akhir Kalkulator
@@ -113,20 +268,26 @@ function showResult() {
   const meatPortions = parseFloat(meatValueRaw);
   const localFood = parseFloat(localFoodValueRaw);
 
-  if (meatValueRaw === "" || localFoodValueRaw === "") {
-    alert("⚠️ Mohon isi semua bidang input pada Langkah 3 terlebih dahulu.");
-    return;
+  const lang = localStorage.getItem('preferredLang') || 'id';
+  let isValid = true;
+
+  if (meatValueRaw === "") {
+    markError(meatInput);
+    isValid = false;
+  } else if (meatPortions < 0) {
+    markError(meatInput, lang === 'en' ? 'Cannot be negative' : 'Tidak boleh negatif');
+    isValid = false;
   }
-  if (meatPortions < 0) {
-    alert("⚠️ Konsumsi daging tidak boleh bernilai negatif.");
-    meatInput.focus();
-    return;
+
+  if (localFoodValueRaw === "") {
+    markError(localFoodInput);
+    isValid = false;
+  } else if (localFood < 0 || localFood > 100) {
+    markError(localFoodInput, lang === 'en' ? 'Must be 0-100%' : 'Harus antara 0-100%');
+    isValid = false;
   }
-  if (localFood < 0 || localFood > 100) {
-    alert("⚠️ Persentase makanan lokal harus berada di antara 0% hingga 100%.");
-    localFoodInput.focus();
-    return;
-  }
+
+  if (!isValid) return;
 
   emissions.transport = calcTransport();
   emissions.house = calcHouse();
@@ -142,12 +303,21 @@ function showResult() {
   updateSidebar(emissions.transport, emissions.house, emissions.food);
 
   let tip = '';
-  if (total < 5) tip = '🌟 Luar biasa! Emisi Anda jauh di bawah rata-rata nasional. Terus pertahankan gaya hidup ramah lingkungan ini!';
-  else if (total < 10) tip = '✅ Emisi Anda tergolong sedang. Coba kurangi penggunaan kendaraan pribadi dan pilih lebih banyak makanan lokal untuk hasil yang lebih baik.';
-  else if (total < 20) tip = '⚠️ Emisi Anda cukup tinggi. Pertimbangkan beralih ke transportasi umum, menghemat listrik, dan mengurangi konsumsi daging.';
-  else tip = '🚨 Emisi Anda sangat tinggi. Prioritaskan pengurangan perjalanan udara, beralih ke energi terbarukan, dan ubah pola makan Anda.';
+  if (total < 5) tip = lang === 'en' 
+    ? '🌟 Excellent! Your emissions are well below average. Keep up this eco-friendly lifestyle!' 
+    : '🌟 Luar biasa! Emisi Anda jauh di bawah rata-rata nasional. Terus pertahankan gaya hidup ramah lingkungan ini!';
+  else if (total < 10) tip = lang === 'en'
+    ? '✅ Your emissions are moderate. Try reducing private vehicle use and choosing more local foods.'
+    : '✅ Emisi Anda tergolong sedang. Coba kurangi penggunaan kendaraan pribadi dan pilih lebih banyak makanan lokal.';
+  else if (total < 20) tip = lang === 'en'
+    ? '⚠️ Your emissions are quite high. Consider public transport, saving electricity, and reducing meat consumption.'
+    : '⚠️ Emisi Anda cukup tinggi. Pertimbangkan beralih ke transportasi umum, menghemat listrik, dan mengurangi konsumsi daging.';
+  else tip = lang === 'en'
+    ? '🚨 Your emissions are very high. Prioritize reducing air travel, switching to renewables, and altering your diet.'
+    : '🚨 Emisi Anda sangat tinggi. Prioritaskan pengurangan perjalanan udara, beralih ke energi terbarukan, dan ubah pola makan Anda.';
 
-  document.getElementById('result-tip').innerHTML = '<strong>Rekomendasi:</strong> ' + tip;
+  const recText = lang === 'en' ? 'Recommendation:' : 'Rekomendasi:';
+  document.getElementById('result-tip').innerHTML = `<strong>${recText}</strong> ${tip}`;
   currentStep = 4;
 }
 
@@ -157,84 +327,13 @@ function restart() {
   currentStep = 1;
   emissions.transport = emissions.house = emissions.food = 0;
   updateSidebar(0, 0, 0);
+  
+  document.querySelectorAll('.error-border').forEach(el => el.classList.remove('error-border'));
+  document.querySelectorAll('.error-message').forEach(el => el.remove());
+  
   ['electric-bill', 'meat-portions', 'local-food'].forEach(id => document.getElementById(id).value = '');
   document.querySelectorAll('.trans-distance').forEach(el => el.value = '');
   document.querySelectorAll('.trans-type').forEach(el => el.value = 'unpicked');
-}
-
-// ─── PENGELOLAAN FORMAT PERABOTAN RUMAH TANGGA ───
-function addAppliance() {
-  const list = document.getElementById('appliance-list');
-  const row = document.createElement('div');
-  row.className = 'appliance-row';
-  row.innerHTML = `
-    <input type="text" placeholder="cth. AC" class="app-name" />
-    <input type="number" placeholder="Jumlah" class="app-qty" min="0" />
-    <button class="btn-remove" onclick="removeAppliance(this)">×</button>
-  `;
-  list.appendChild(row);
-}
-
-function removeAppliance(btn) {
-  const list = document.getElementById('appliance-list');
-  if (list.children.length > 1) {
-    btn.closest('.appliance-row').remove();
-  }
-}
-
-// ─── PENGELOLAAN TRANSPORTASI DINAMIS ───
-function calcTransport() {
-  const rows = document.querySelectorAll('.transport-row');
-  let totalTransportEmission = 0;
-
-  rows.forEach(row => {
-    const distanceInput = row.querySelector('.trans-distance').value;
-    const vehicleType = row.querySelector('.trans-type').value;
-    const d = parseFloat(distanceInput) || 0;
-    const fac = vehicleFactors[vehicleType] || 0; 
-    totalTransportEmission += (d * fac);
-  });
-  return +totalTransportEmission.toFixed(2);
-}
-
-function addTransport() {
-  const list = document.getElementById('transport-list');
-  const row = document.createElement('div');
-  row.className = 'form-row transport-row';
-  row.style.marginBottom = '16px';
-  row.style.alignItems = 'flex-end';
-  
-  row.innerHTML = `
-    <div class="form-group" style="flex: 1;">
-      <label>Total Jarak Tempuh (km)</label>
-      <input type="number" class="trans-distance" placeholder="cth. 50" min="0" />
-    </div>
-    <div class="form-group" style="flex: 1;">
-      <label>Tipe Transportasi</label>
-      <select class="trans-type">
-        <option value="unpicked">Pilih kendaraan</option>
-        <option value="motor">Motor</option>
-        <option value="mobil">Mobil Bensin</option>
-        <option value="mobil-diesel">Mobil Diesel</option>
-        <option value="bus">Bus Umum</option>
-        <option value="kereta">Kereta</option>
-        <option value="pesawat">Pesawat</option>
-        <option value="mobil-listrik">Mobil Listrik</option>
-        <option value="motor-listrik">Motor Listrik</option>
-      </select>
-    </div>
-    <button class="btn-remove" type="button" onclick="removeTransport(this)" style="margin-bottom: 6px; padding: 10px 14px;">×</button>
-  `;
-  list.appendChild(row);
-}
-
-function removeTransport(btn) {
-  const list = document.getElementById('transport-list');
-  if (list.children.length > 1) {
-    btn.closest('.transport-row').remove();
-    emissions.transport = calcTransport();
-    updateSidebar(emissions.transport, emissions.house, 0);
-  } else {
-    alert("⚠️ Minimal harus ada satu input transportasi.");
-  }
+  document.querySelectorAll('.app-name').forEach(el => el.value = '');
+  document.querySelectorAll('.app-qty').forEach(el => el.value = '');
 }

@@ -15,50 +15,59 @@
   <nav>
     <a class="nav-logo" href="index.html">EcoHabit</a>
     <ul class="nav-links">
-      <li><a class="active" href="home.html">Home</a></li>
-      <li><a href="calculator.html">Calculator</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="aboutUs.html">About Us</a></li>
+      <li><a class="active" href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="calculator.html" data-i18n="nav_calc">Calculator</a></li>
+      <li><a href="dashboard.html" data-i18n="nav_dash">Dashboard</a></li>
+      <li><a href="aboutUs.html" data-i18n="nav_about">About Us</a></li>
     </ul>
-    <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+    
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button id="lang-id" class="lang-btn active">ID</button>
+        <span class="lang-divider">|</span>
+        <button id="lang-en" class="lang-btn">EN</button>
+      </div>
+
+      <button class="btn-login" data-i18n="btn_login" onclick="window.location.href='login.html'">Login</button>
+    </div>
   </nav>
 
   <div class="page active">
     <section class="hero">
-      <h1>Penasaran Berapa CO₂ Yang Anda Hasilkan?</h1>
-      <button class="btn-hero" onclick="window.location.href='calculator.html'">Hitung Emisi Karbon Kamu</button>
-      <p>Mulai langkah kecilmu hari ini dan jadilah bagian dari generasi peduli lingkungan. Pahami dan kurangi jejak karbonmu dengan cara yang mudah dan interaktif!</p>
+      <h1 data-i18n="home_hero_title">Penasaran Berapa CO₂ Yang Anda Hasilkan?</h1>
+      <button class="btn-hero" data-i18n="home_hero_btn" onclick="window.location.href='calculator.html'">Hitung Emisi Karbon Kamu</button>
+      <p data-i18n="home_hero_desc">Mulai langkah kecilmu hari ini dan jadilah bagian dari generasi peduli lingkungan. Pahami dan kurangi jejak karbonmu dengan cara yang mudah dan interaktif!</p>
     </section>
 
     <section class="impact">
-      <p class="impact-label">Memang Benar Mengurangi Emisi Penting?</p>
-      <h2>Inilah Yang Akan Terjadi Jika Emisi Terus Naik</h2>
+      <p class="impact-label" data-i18n="home_impact_label">Memang Benar Mengurangi Emisi Penting?</p>
+      <h2 data-i18n="home_impact_title">Inilah Yang Akan Terjadi Jika Emisi Terus Naik</h2>
       <div class="cards-grid">
         <div class="card">
           <div class="card-icon">🌡️</div>
-          <h3>Pemanasan Global</h3>
-          <p>Suhu Indonesia diperkirakan naik sekitar 1–1.5 °C pada 2050. Dampaknya adalah cuaca makin panas serta risiko banjir dan kekeringan yang lebih tinggi. Hal ini terjadi karena gas seperti CO₂ menahan panas di atmosfer dan memicu pemanasan global.</p>
+          <h3 data-i18n="home_impact_c1_title">Pemanasan Global</h3>
+          <p data-i18n="home_impact_c1_desc">Suhu Indonesia diperkirakan naik sekitar 1–1.5 °C pada 2050. Dampaknya adalah cuaca makin panas serta risiko banjir dan kekeringan yang lebih tinggi. Hal ini terjadi karena gas seperti CO₂ menahan panas di atmosfer dan memicu pemanasan global.</p>
         </div>
         <div class="card">
           <div class="card-icon">💨</div>
-          <h3>Kualitas Udara</h3>
-          <p>Kualitas udara diperkirakan akan semakin memburuk di masa depan. Dampaknya dapat berupa meningkatnya polusi udara, gangguan pernapasan, dan risiko kesehatan lainnya. Hal ini terjadi karena emisi dari kendaraan dan industri menghasilkan polutan serta gas rumah kaca yang mencemari atmosfer.</p>
+          <h3 data-i18n="home_impact_c2_title">Kualitas Udara</h3>
+          <p data-i18n="home_impact_c2_desc">Kualitas udara diperkirakan akan semakin memburuk di masa depan. Dampaknya dapat berupa meningkatnya polusi udara, gangguan pernapasan, dan risiko kesehatan lainnya. Hal ini terjadi karena emisi dari kendaraan dan industri menghasilkan polutan serta gas rumah kaca yang mencemari atmosfer.</p>
         </div>
       </div>
     </section>
 
     <section class="plan">
-      <h2>Rencananya Apa Dong?</h2>
+      <h2 data-i18n="home_plan_title">Rencananya Apa Dong?</h2>
       <div class="cards-grid">
         <div class="card">
           <div class="card-icon">📊</div>
-          <h3>Emisi Pada 2025</h3>
-          <p>Pada tahun 2025, emisi karbon Indonesia masih tergolong tinggi. Sektor transportasi dan energi menjadi penyumbang terbesar emisi karbon. Kendaraan bermotor, penggunaan bahan bakar fosil, dan aktivitas industri terus meningkatkan jumlah gas rumah kaca di atmosfer.</p>
+          <h3 data-i18n="home_plan_c1_title">Emisi Pada 2025</h3>
+          <p data-i18n="home_plan_c1_desc">Pada tahun 2025, emisi karbon Indonesia masih tergolong tinggi. Sektor transportasi dan energi menjadi penyumbang terbesar emisi karbon. Kendaraan bermotor, penggunaan bahan bakar fosil, dan aktivitas industri terus meningkatkan jumlah gas rumah kaca di atmosfer.</p>
         </div>
         <div class="card">
           <div class="card-icon">🎯</div>
-          <h3>Target Emisi</h3>
-          <p>Indonesia menargetkan pengurangan emisi karbon secara bertahap menuju net zero emission pada tahun 2060. Pemerintah mulai meningkatkan penggunaan energi terbarukan serta mendorong penggunaan kendaraan listrik dan transportasi umum.</p>
+          <h3 data-i18n="home_plan_c2_title">Target Emisi</h3>
+          <p data-i18n="home_plan_c2_desc">Indonesia menargetkan pengurangan emisi karbon secara bertahap menuju net zero emission pada tahun 2060. Pemerintah mulai meningkatkan penggunaan energi terbarukan serta mendorong penggunaan kendaraan listrik dan transportasi umum.</p>
         </div>
       </div>
     </section>
@@ -66,10 +75,10 @@
     <footer>
       <div class="footer-logo">EcoHabit</div>
       <ul class="footer-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="aboutUs.html">About</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="aboutUs.html" data-i18n="nav_about">About</a></li>
+        <li><a href="#" data-i18n="ft_service">Service</a></li>
+        <li><a href="#" data-i18n="ft_contact">Contact Us</a></li>
       </ul>
       <div class="footer-socials">
         <a class="social-icon" href="#" title="Facebook">f</a>
@@ -80,6 +89,7 @@
     </footer>
   </div>
 
+  <script src="js/lang.js"></script>
   <script src="js/global.js"></script>
 </body>
 </html>

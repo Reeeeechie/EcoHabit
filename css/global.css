@@ -218,6 +218,60 @@ footer {
   color: var(--text-muted);
 }
 
+/* ─── Navigation Actions & Language Toggle ─── */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cream-dark);
+  padding: 4px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  /* --- NEW PROPERTIES --- */
+  cursor: pointer; 
+  user-select: none; 
+}
+
+/* Optional: Make the children ignore mouse events so the hover state 
+   applies to the whole container uniformly */
+.lang-toggle * {
+  pointer-events: none;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  color: var(--text-dark);
+}
+
+.lang-btn.active {
+  background: var(--white);
+  color: var(--green-dark);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.lang-divider {
+  color: var(--border);
+  font-size: 0.8rem;
+}
+
 /* ─── Global Responsive ─── */
 @media (max-width: 720px) {
   nav { padding: 0 20px; }

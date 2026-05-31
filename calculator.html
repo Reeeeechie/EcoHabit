@@ -13,28 +13,37 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="home.html">EcoHabit</a>
+    <a class="nav-logo" href="index.html">EcoHabit</a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a class="active" href="calculator.html">Calculator</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="aboutUs.html">About Us</a></li>
+      <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+      <li><a class="active" href="calculator.html" data-i18n="nav_calc">Calculator</a></li>
+      <li><a href="dashboard.html" data-i18n="nav_dash">Dashboard</a></li>
+      <li><a href="aboutUs.html" data-i18n="nav_about">About Us</a></li>
     </ul>
-    <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+    
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button id="lang-id" class="lang-btn active">ID</button>
+        <span class="lang-divider">|</span>
+        <button id="lang-en" class="lang-btn">EN</button>
+      </div>
+
+      <button class="btn-login" data-i18n="btn_login" onclick="window.location.href='login.html'">Login</button>
+    </div>
   </nav>
 
   <div class="page active">
     <div class="calc-page">
-      <h1>Kalkulator Emisi Karbon</h1>
-      <p class="subtitle">Hitung emisi karbon Anda hanya dalam 3 langkah!</p>
+      <h1 data-i18n="calc_title">Kalkulator Emisi Karbon</h1>
+      <p class="subtitle" data-i18n="calc_subtitle">Hitung emisi karbon Anda hanya dalam 3 langkah!</p>
 
       <div class="calc-layout">
         <div>
           <div id="step1" class="step-card">
             <div class="step-header">
                 <div class="step-title-row">
-                <span>Langkah 1: Transportasi</span>
-                <span>0% Selesai</span>
+                <span data-i18n="calc_s1_title">Langkah 1: Transportasi</span>
+                <span data-i18n="calc_s1_progress">0% Selesai</span>
                 </div>
                 <div class="step-progress">
                 <div class="step-progress-bar" style="width: 0%"></div>
@@ -44,8 +53,8 @@
                 <div class="step-icon-row">
                 <div class="step-icon">🚗</div>
                 <div>
-                    <h2>Transportasi</h2>
-                    <p>Kendaraan apa saja yang Anda gunakan untuk bepergian?</p>
+                    <h2 data-i18n="calc_s1_head">Transportasi</h2>
+                    <p data-i18n="calc_s1_desc">Kendaraan apa saja yang Anda gunakan untuk bepergian?</p>
                 </div>
                 </div>
                 <div class="form-divider"></div>
@@ -53,40 +62,40 @@
                 <div id="transport-list">
                 <div class="form-row transport-row" style="margin-bottom: 16px; align-items: flex-end;">
                     <div class="form-group" style="flex: 1;">
-                    <label>Total Jarak Tempuh (km)</label>
-                    <input type="number" class="trans-distance" placeholder="cth. 50" min="0" />
+                    <label data-i18n="calc_s1_label_dist">Total Jarak Tempuh (km)</label>
+                    <input type="number" class="trans-distance" data-i18n="calc_s1_place_dist" placeholder="cth. 50" min="0" />
                     </div>
                     <div class="form-group" style="flex: 1;">
-                        <label>Tipe Transportasi</label>
+                        <label data-i18n="calc_s1_label_type">Tipe Transportasi</label>
                         <select class="trans-type">
-                            <option value="unpicked">Pilih kendaraan</option>
-                            <option value="motor">Motor</option>
-                            <option value="mobil">Mobil Bensin</option>
-                            <option value="mobil-diesel">Mobil Diesel</option>
-                            <option value="bus">Bus Umum</option>
-                            <option value="kereta">Kereta</option>
-                            <option value="pesawat">Pesawat</option>
-                            <option value="mobil-listrik">Mobil Listrik</option>
-                            <option value="motor-listrik">Motor Listrik</option>
+                            <option value="unpicked" data-i18n="calc_s1_opt_unpicked">Pilih kendaraan</option>
+                            <option value="motor" data-i18n="calc_s1_opt_motor">Motor</option>
+                            <option value="mobil" data-i18n="calc_s1_opt_mobil">Mobil Bensin</option>
+                            <option value="mobil-diesel" data-i18n="calc_s1_opt_diesel">Mobil Diesel</option>
+                            <option value="bus" data-i18n="calc_s1_opt_bus">Bus Umum</option>
+                            <option value="kereta" data-i18n="calc_s1_opt_kereta">Kereta</option>
+                            <option value="pesawat" data-i18n="calc_s1_opt_pesawat">Pesawat</option>
+                            <option value="mobil-listrik" data-i18n="calc_s1_opt_mobil_ev">Mobil Listrik</option>
+                            <option value="motor-listrik" data-i18n="calc_s1_opt_motor_ev">Motor Listrik</option>
                         </select>
                     </div>
                     <button class="btn-remove" type="button" onclick="removeTransport(this)" style="margin-bottom: 6px; padding: 10px 14px;">×</button>
                 </div>
                 </div>
 
-                <button class="btn-add" type="button" onclick="addTransport()" style="margin-top: 8px;">+ Tambah Transportasi</button>
+                <button class="btn-add" type="button" data-i18n="calc_s1_btn_add" onclick="addTransport()" style="margin-top: 8px;">+ Tambah Transportasi</button>
             </div>
             <div class="step-footer" style="margin-top: 24px;">
-                <button class="btn-back" disabled style="opacity: 0.4; cursor: not-allowed;">Kembali</button>
-                <button class="btn-next" onclick="goStep(2)">Selanjutnya →</button>
+                <button class="btn-back" data-i18n="btn_back" disabled style="opacity: 0.4; cursor: not-allowed;">Kembali</button>
+                <button class="btn-next" data-i18n="btn_next" onclick="goStep(2)">Selanjutnya →</button>
             </div>
-            </div>
+          </div>
 
           <div id="step2" class="step-card" style="display: none;">
             <div class="step-header">
               <div class="step-title-row">
-                <span>Langkah 2: Rumah Tangga</span>
-                <span>33% Selesai</span>
+                <span data-i18n="calc_s2_title">Langkah 2: Rumah Tangga</span>
+                <span data-i18n="calc_s2_progress">33% Selesai</span>
               </div>
               <div class="step-progress">
                 <div class="step-progress-bar" style="width: 33%"></div>
@@ -96,38 +105,38 @@
               <div class="step-icon-row">
                 <div class="step-icon">🏠</div>
                 <div>
-                  <h2>Rumah Tangga</h2>
-                  <p>Peralatan apa saja yang ada di rumah Anda?</p>
+                  <h2 data-i18n="calc_s2_head">Rumah Tangga</h2>
+                  <p data-i18n="calc_s2_desc">Peralatan apa saja yang ada di rumah Anda?</p>
                 </div>
               </div>
               <div class="form-divider"></div>
-              <p style="font-size: 0.85rem; color: var(--text-mid); margin-bottom: 14px; font-weight: 500;">Perabotan-Perabotan</p>
+              <p style="font-size: 0.85rem; color: var(--text-mid); margin-bottom: 14px; font-weight: 500;" data-i18n="calc_s2_label_app">Perabotan-Perabotan</p>
               <div class="appliance-list" id="appliance-list">
                 <div class="appliance-row">
-                  <input type="text" placeholder="cth. Lampu" class="app-name" />
-                  <input type="number" placeholder="Masukkan jumlah perabotan" class="app-qty" min="0" />
+                  <input type="text" data-i18n="calc_s2_place_app" placeholder="cth. Lampu" class="app-name" />
+                  <input type="number" data-i18n="calc_s2_place_qty" placeholder="Masukkan jumlah perabotan" class="app-qty" min="0" />
                   <button class="btn-remove" onclick="removeAppliance(this)">×</button>
                 </div>
               </div>
-              <button class="btn-add" onclick="addAppliance()">+ Tambah Baris</button>
+              <button class="btn-add" data-i18n="calc_s2_btn_add" onclick="addAppliance()">+ Tambah Baris</button>
               <div style="margin-top: 20px;">
                 <div class="form-group">
-                  <label>Tagihan Listrik/Bulan (Rp)</label>
-                  <input type="number" id="electric-bill" placeholder="cth. 300000" min="0" />
+                  <label data-i18n="calc_s2_label_bill">Tagihan Listrik/Bulan (Rp)</label>
+                  <input type="number" id="electric-bill" data-i18n="calc_s2_place_bill" placeholder="cth. 300000" min="0" />
                 </div>
               </div>
             </div>
             <div class="step-footer">
-              <button class="btn-back" onclick="goStep(1)">Kembali</button>
-              <button class="btn-next" onclick="goStep(3)">Selanjutnya →</button>
+              <button class="btn-back" data-i18n="btn_back" onclick="goStep(1)">Kembali</button>
+              <button class="btn-next" data-i18n="btn_next" onclick="goStep(3)">Selanjutnya →</button>
             </div>
           </div>
 
           <div id="step3" class="step-card" style="display: none;">
             <div class="step-header">
               <div class="step-title-row">
-                <span>Langkah 3: Makanan &amp; Minuman</span>
-                <span>67% Selesai</span>
+                <span data-i18n="calc_s3_title">Langkah 3: Makanan &amp; Minuman</span>
+                <span data-i18n="calc_s3_progress">67% Selesai</span>
               </div>
               <div class="step-progress">
                 <div class="step-progress-bar" style="width: 67%"></div>
@@ -137,44 +146,44 @@
               <div class="step-icon-row">
                 <div class="step-icon">🍽️</div>
                 <div>
-                  <h2>Makanan &amp; Minuman</h2>
-                  <p>Bagaimana pola makan Anda sehari-hari?</p>
+                  <h2 data-i18n="calc_s3_head">Makanan &amp; Minuman</h2>
+                  <p data-i18n="calc_s3_desc">Bagaimana pola makan Anda sehari-hari?</p>
                 </div>
               </div>
               <div class="form-divider"></div>
               <div class="form-row">
                 <div class="form-group">
-                  <label>Pola Makan</label>
+                  <label data-i18n="calc_s3_label_diet">Pola Makan</label>
                   <select id="diet">
-                    <option value="vegan">Vegan</option>
-                    <option value="vegetarian">Vegetarian</option>
-                    <option value="mixed" selected>Campuran</option>
-                    <option value="meat-heavy">Banyak Daging</option>
+                    <option value="vegan" data-i18n="calc_s3_opt_vegan">Vegan</option>
+                    <option value="vegetarian" data-i18n="calc_s3_opt_vege">Vegetarian</option>
+                    <option value="mixed" selected data-i18n="calc_s3_opt_mixed">Campuran</option>
+                    <option value="meat-heavy" data-i18n="calc_s3_opt_meat">Banyak Daging</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Konsumsi Daging/Minggu (porsi)</label>
-                  <input type="number" id="meat-portions" placeholder="cth. 7" min="0" />
+                  <label data-i18n="calc_s3_label_meat">Konsumsi Daging/Minggu (porsi)</label>
+                  <input type="number" id="meat-portions" data-i18n="calc_s3_place_meat" placeholder="cth. 7" min="0" />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group full">
-                  <label>Konsumsi Makanan Lokal (%)</label>
-                  <input type="number" id="local-food" placeholder="cth. 60" min="0" max="100" />
+                  <label data-i18n="calc_s3_label_local">Konsumsi Makanan Lokal (%)</label>
+                  <input type="number" id="local-food" data-i18n="calc_s3_place_local" placeholder="cth. 60" min="0" max="100" />
                 </div>
               </div>
             </div>
             <div class="step-footer">
-              <button class="btn-back" onclick="goStep(2)">Kembali</button>
-              <button class="btn-next" onclick="showResult()">Hitung Emisi →</button>
+              <button class="btn-back" data-i18n="btn_back" onclick="goStep(2)">Kembali</button>
+              <button class="btn-next" data-i18n="calc_s3_btn_calc" onclick="showResult()">Hitung Emisi →</button>
             </div>
           </div>
 
           <div id="step-result" class="step-card" style="display: none;">
             <div class="step-header">
               <div class="step-title-row">
-                <span>Hasil Estimasi Anda</span>
-                <span>100% Selesai ✓</span>
+                <span data-i18n="calc_res_title">Hasil Estimasi Anda</span>
+                <span data-i18n="calc_res_progress">100% Selesai ✓</span>
               </div>
               <div class="step-progress">
                 <div class="step-progress-bar" style="width: 100%"></div>
@@ -184,33 +193,33 @@
               <div class="step-icon-row">
                 <div class="step-icon">🌿</div>
                 <div>
-                  <h2>Emisi Karbon Anda</h2>
-                  <p>Berdasarkan data yang Anda masukkan</p>
+                  <h2 data-i18n="calc_res_head">Emisi Karbon Anda</h2>
+                  <p data-i18n="calc_res_desc">Berdasarkan data yang Anda masukkan</p>
                 </div>
               </div>
               <div class="form-divider"></div>
               <div class="result-grid">
                 <div class="result-item">
                   <div class="val" id="res-transport">—</div>
-                  <div class="lbl">Transportasi<br />(Ton CO₂/Tahun)</div>
+                  <div class="lbl" data-i18n="calc_res_trans">Transportasi<br />(Ton CO₂/Tahun)</div>
                 </div>
                 <div class="result-item">
                   <div class="val" id="res-house">—</div>
-                  <div class="lbl">Rumah Tangga<br />(Ton CO₂/Tahun)</div>
+                  <div class="lbl" data-i18n="calc_res_house">Rumah Tangga<br />(Ton CO₂/Tahun)</div>
                 </div>
                 <div class="result-item">
                   <div class="val" id="res-food">—</div>
-                  <div class="lbl">Makanan<br />(Ton CO₂/Tahun)</div>
+                  <div class="lbl" data-i18n="calc_res_food">Makanan<br />(Ton CO₂/Tahun)</div>
                 </div>
               </div>
               <div class="result-tip" id="result-tip"></div>
-              <button class="btn-restart" onclick="restart()">🔄 Hitung Ulang</button>
+              <button class="btn-restart" data-i18n="calc_res_btn_restart" onclick="restart()">🔄 Hitung Ulang</button>
             </div>
           </div>
         </div>
 
         <div class="estimate-card">
-          <h3>Estimasi Emisi Karbon</h3>
+          <h3 data-i18n="calc_side_title">Estimasi Emisi Karbon</h3>
           <div class="estimate-total" id="total-display">??? Ton CO₂ / Tahun</div>
           <div class="estimate-bar-bg">
             <div class="estimate-bar-fill" id="sidebar-bar" style="width: 20%"></div>
@@ -218,15 +227,15 @@
           <div class="legend">
             <div class="legend-item">
               <div class="legend-dot dot-transport"></div>
-              Transportasi
+              <span data-i18n="calc_side_trans">Transportasi</span>
             </div>
             <div class="legend-item">
               <div class="legend-dot dot-house"></div>
-              Perabotan Rumah Tangga
+              <span data-i18n="calc_side_house">Perabotan Rumah Tangga</span>
             </div>
             <div class="legend-item">
               <div class="legend-dot dot-food"></div>
-              Makanan &amp; Minuman
+              <span data-i18n="calc_side_food">Makanan &amp; Minuman</span>
             </div>
           </div>
         </div>
@@ -236,20 +245,21 @@
     <footer>
       <div class="footer-logo">EcoHabit</div>
       <ul class="footer-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="aboutUs.html">About</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="aboutUs.html" data-i18n="nav_about">About</a></li>
+        <li><a href="#" data-i18n="ft_service">Service</a></li>
+        <li><a href="#" data-i18n="ft_contact">Contact Us</a></li>
       </ul>
       <div class="footer-socials">
-        <a class="social-icon" href="#" title="Facebook">f</a>
-        <a class="social-icon" href="#" title="Instagram">IG</a>
-        <a class="social-icon" href="#" title="X">𝕏</a>
+        <a class="social-icon" href="#">f</a>
+        <a class="social-icon" href="#">IG</a>
+        <a class="social-icon" href="#">𝕏</a>
       </div>
       <p class="footer-copy">© 2026 EcoHabit</p>
     </footer>
   </div>
 
+  <script src="js/lang.js"></script>
   <script src="js/global.js"></script>
   <script src="js/calculator.js"></script>
 </body>
