@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If both are filled, proceed to dashboard
     if (isValid) {
       localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('username', usernameInput.value);
       window.location.href = 'dashboard.html';
     }
   });

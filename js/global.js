@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create the profile picture (using a placeholder avatar API based on your brand colors)
     const profilePic = document.createElement('img');
-    profilePic.src = 'https://ui-avatars.com/api/?name=Rafael+Gay&background=2d5a40&color=fff'; 
+    const username = localStorage.getItem('username');
+    profilePic.src = `https://ui-avatars.com/api/?name=${username}&background=2d5a40&color=fff`; 
     profilePic.alt = 'Profile';
     profilePic.className = 'nav-profile';
 
