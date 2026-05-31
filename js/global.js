@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutBtn.textContent = 'Logout';
     logoutBtn.onclick = () => {
       localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
       window.location.reload(); // Reload to show the Login button again
     };
 

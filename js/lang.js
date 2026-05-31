@@ -254,7 +254,7 @@ function setLanguage(lang) {
     const translationKey = element.getAttribute('data-i18n');
     if (translations[lang] && translations[lang][translationKey]) {
       
-      // NEW: Check if the element is an input to update the placeholder instead
+      // Check if the element is an input to update the placeholder instead
       if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
         element.placeholder = translations[lang][translationKey];
       } 
