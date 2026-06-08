@@ -6,26 +6,34 @@ const emissions = { transport: 0, house: 0, food: 0 };
 const vehicleFactors = {
   motor: 0.09, 
   mobil: 0.21, 
-  'mobil-diesel': 0.27,
+  'mobil-diesel': 0.24,
   bus: 0.08, 
   kereta: 0.04, 
-  pesawat: 0.25, 
+  pesawat: 0.3, 
   'mobil-listrik': 0.12,
   'motor-listrik': 0.04,
   unpicked: 0
 };
 
 const dietFactors = { 
-  vegan: 2, 
-  vegetarian: 1, 
-  mixed: 3, 
-  'meat-heavy': 5
+  vegan: 0.7, 
+  vegetarian: 1.0, 
+  mixed: 1.8, 
+  'meat-heavy': 2.5
 };
 
 // ─── FUNGSI KALKULASI INTERNAL ───
 function calcHouse() {
   const bill = parseFloat(document.getElementById('electric-bill').value) || 0;
-  return +(bill * 0.000002 * 4).toFixed(2);
+  return +(bill *0.00000706).toFixed(2);
+}
+
+function getMeatMultiplier(servings) {
+  if (servings <= 1) return 0.6;
+  if (servings <= 4) return 0.8;
+  if (servings <= 7) return 1.0;
+  if (servings <= 10) return 1.2;
+  return 1.4;
 }
 
 function calcFood() {
@@ -33,8 +41,10 @@ function calcFood() {
   const meat = parseFloat(document.getElementById('meat-portions').value) || 0;
   const local = parseFloat(document.getElementById('local-food').value) || 50;
   const base = dietFactors[diet];
-  const localFactor = 1 - (local / 200);
-  return +((base + meat * 0.01) * localFactor).toFixed(2);
+  locallySourced = 1-(local/100) *0.1;
+  const meatMultiplier =  getMeatMultiplier(meat);
+
+  return +(base * meatMultiplier * locallySourced).toFixed(2);
 }
 
 function calcTransport() {
@@ -46,7 +56,7 @@ function calcTransport() {
     const vehicleType = row.querySelector('.trans-type').value;
     const d = parseFloat(distanceInput) || 0;
     const fac = vehicleFactors[vehicleType] || 0; 
-    totalTransportEmission += (d * fac);
+    totalTransportEmission += (d * fac *365/1000);
   });
   return +totalTransportEmission.toFixed(2);
 }
